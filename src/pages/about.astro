@@ -1,0 +1,85 @@
+---
+import '../styles/global.css';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import Hamburger from '../components/Hamburger.astro';
+
+const pageTitle = 'Sobre Mi';
+const subTitle = '... y mi nuevo sitio en Astro :D';
+const description = 'Este sitio sera actualizado mediante vaya completando el tutorial por lo que continua al pendiente para ver como evoluciona mi trabajo :)'
+
+const identity = {
+    firstName: 'Rafael',
+    lastName: 'Benitez Diaz',
+    country: 'Mexico',
+    occupation: 'Estudiante de IT',
+    hobbies: ['Ver Batallas de Rap', 'Programar', 'Basketball']
+};
+
+const skills = ['HTML', 'CSS', 'JavaScript', 'Git', 'Astro', 'Tailwind']
+
+const happy = true;
+const finished = false;
+const goal = 3;
+
+const skillColor = '#ff5d17';
+const fontWeight = 'bold';
+const textCase = 'uppercase'
+---
+
+<html lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{pageTitle}</title>
+
+        <style define:vars={{skillColor, fontWeight, textCase}}>
+            h1 {
+                color: purple;
+                font-size: 4rem;
+            }
+            .skill {
+                color: var(--skillColor);
+                font-weight: var(--fontWeight);
+                text-transform: var(--textCase);
+            }
+        </style>
+
+	</head>
+	<body>
+        <Hamburger />
+        <Header />
+
+		<h1>{pageTitle}</h1>
+		<h2>{subTitle}</h2>
+        <p>Hola, soy Rafa y estoy aprendiendo Astro. 🪐</p>
+        <p>{description}</p>
+
+        <p>Te dejo unos datos sobre mi:</p>
+        <ul>
+            <li>Mi nombre es {identity.firstName + ' '} {identity.lastName}.</li>
+            <li>Vivo en {identity.country} y soy {identity.occupation}</li>
+            
+            { identity.hobbies.length >= 3 &&
+                <li>Dos de mis hobbies son: {identity.hobbies[0]} y {identity.hobbies[1]}</li>
+            } 
+        </ul>
+
+        <p>Mis skills son:</p>
+        <ul>
+            {skills.map((skill) => <li class="skill">{skill}</li>)}
+        </ul>
+
+        {happy && <p>Estoy feliz de estar aprendiendo Astro! 🪐</p>}
+        {finished && <p>I finished this tutorial</p>}
+        {goal === 3 ? <p>Mi meta es terminar el tutorial en tres dias.</p> : <p>My goal is not 3 days</p>}
+
+        <Footer />
+
+        <script>
+			import '../scripts/menu.js'
+		</script>
+	</body>
+</html>
